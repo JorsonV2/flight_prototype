@@ -1,0 +1,154 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://PlanePC/texture_PC_dDo02_n.png" type="Texture" id=1]
+[ext_resource path="res://PlanePC/texture_PC_dDo02_d_before.tga" type="Texture" id=2]
+[ext_resource path="res://src/flight_contoller.gd" type="Script" id=3]
+[ext_resource path="res://PlanePC/final_model_.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://terain/data.hterrain" type="Resource" id=5]
+[ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=6]
+[ext_resource path="res://scenes/collectable.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sfx/airplane+b131.wav" type="AudioStream" id=8]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 2 )
+metallic = 0.7
+metallic_specular = 0.0
+roughness = 0.25
+normal_enabled = true
+normal_scale = 1.5
+normal_texture = ExtResource( 1 )
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 6.34
+height = 61.12
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 39.086, 2.22, 5.58 )
+
+[sub_resource type="BoxShape" id=4]
+
+[sub_resource type="CubeMesh" id=5]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 2.09794, 3.87526, -8.97669, 4.67479, 7.66607, 4.40201, 8.58749, -5.11993, -0.203303, -25.0469, 17.8266, -22.9582 )
+
+[node name="MeshInstance" parent="." instance=ExtResource( 7 )]
+
+[node name="MeshInstance9" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.6788, 7.98384, 28.2409 )
+
+[node name="MeshInstance2" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.2329, -30.3079 )
+
+[node name="MeshInstance10" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.6585, 5.33028, -10.7459 )
+
+[node name="MeshInstance11" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26.8436, 3.67145, -16.5531 )
+
+[node name="MeshInstance8" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65.0209, 11.8523, -8.35762 )
+
+[node name="MeshInstance3" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -37.9506, 8.01857, -30.3079 )
+
+[node name="MeshInstance4" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -37.9506, 9.90212, 12.4613 )
+
+[node name="MeshInstance5" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -42.1903, 11.4668, 64.9756 )
+
+[node name="MeshInstance6" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.6423, 16.1868, 66.6782 )
+
+[node name="MeshInstance7" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 56.9363, 24.8267, 69.1704 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, -6.51683e-07, 0, 1, 0, 6.51683e-07, 0, 1, 0, 13.161, 22.1968 )
+current = true
+far = 400.0
+script = ExtResource( 3 )
+move_speed = 20
+pitch_speed = 70
+yaw_speed = 70
+roll_speed = 40
+
+[node name="Plane" type="MeshInstance" parent="Camera"]
+transform = Transform( -0.05, 0, 1.62921e-08, 0, 0.05, 0, -1.62921e-08, 0, -0.05, -9.09495e-13, -5.308, -13.12 )
+use_in_baked_light = true
+mesh = ExtResource( 4 )
+material/0 = SubResource( 1 )
+
+[node name="Area" type="Area" parent="Camera/Plane" groups=[
+"plane",
+]]
+
+[node name="CollisionShape" type="CollisionShape" parent="Camera/Plane/Area"]
+transform = Transform( 1, 0, -3.41061e-13, 0, 1, 0, 0, 0, 1, 0, 2.852, 0 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Camera/Plane/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.833, 0 )
+shape = SubResource( 3 )
+
+[node name="Area2" type="RigidBody" parent="Camera/Plane" groups=[
+"plane",
+]]
+
+[node name="CollisionShape" type="CollisionShape" parent="Camera/Plane/Area2"]
+transform = Transform( 1, 0, -3.41061e-13, 0, 1, 0, 0, 0, 1, 0, 2.852, 0 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Camera/Plane/Area2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.833, 0 )
+shape = SubResource( 3 )
+
+[node name="HTerrain" type="Spatial" parent="." groups=[
+"terrain",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, -100 )
+script = ExtResource( 6 )
+map_scale = Vector3( 0.4, 1, 0.4 )
+_terrain_data = ExtResource( 5 )
+chunk_size = 32
+shader_type = "LowPoly"
+custom_shader = null
+ground/albedo_bump_0 = null
+ground/normal_roughness_0 = null
+ground/albedo_bump_1 = null
+ground/normal_roughness_1 = null
+ground/albedo_bump_2 = null
+ground/normal_roughness_2 = null
+ground/albedo_bump_3 = null
+ground/normal_roughness_3 = null
+
+[node name="RigidBody" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.93428, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
+shape = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody"]
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="RigidBody2" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38.228, 19.616, 94.8056 )
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody2"]
+shape = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody2"]
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -30.0
+autoplay = true
+[connection signal="body_entered" from="Camera/Plane/Area" to="Camera" method="_on_Area_body_entered"]
+[connection signal="body_shape_entered" from="Camera/Plane/Area" to="Camera" method="_on_Area_body_shape_entered"]
+[connection signal="body_shape_entered" from="Camera/Plane/Area2" to="Camera" method="_on_Area2_body_shape_entered"]
